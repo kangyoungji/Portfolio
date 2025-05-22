@@ -2,12 +2,14 @@ window.addEventListener("load", function() {
     let start = document.querySelector("#start");
 	let headerBar = document.querySelector("#header .header-inner");
     let menuArea = start.firstElementChild;
-	let sectionList=document.querySelectorAll("section[id]")
+	let sectionList=document.querySelectorAll("section[id]");
     let menu = document.querySelector("nav");
     let menuList = menu.querySelectorAll("li");
-	let menuBtn = document.querySelector("menu_btn");
+	let menuBtn = document.querySelector(".menu_btn");
 	let openMenu = document.querySelector(".open");
-	let closeMenu = document.querySelector("close");
+	let closeMenu = document.querySelector(".close");
+	let nav = document.querySelector("#header .menu nav");
+	let moText = document.querySelector("#header .menu p.mo_t");
 
     let skillTitle = document.querySelectorAll("#skill .left li");
     let skillTab = document.querySelectorAll("#skill .right_b li");
@@ -110,16 +112,37 @@ window.addEventListener("load", function() {
 		});
 	});
 
-	let topPos=0;
+	menuBtn.addEventListener("click", function(e){
+		e.preventDefault();
 
-	window.addEventListener("resize", function(){
-		if(window.innerWidth > 768 && menuBtn.classList.contains("active")){
-			headerBar.classList.remove("active");
-			menuBtn.classList.remove("active");
+		openMenu.classList.toggle("active");
+		closeMenu.classList.toggle("active");
+		headerBar.classList.toggle("active");
+		menu.classList.toggle("active");
+		moText.classList.toggle("active");
+
+		if (menu.classList.contains("active")) {
+			const menuItems = menu.querySelectorAll("nav ul li");
+			menuItems.forEach((item, index) => {
+				gsap.fromTo(item, 
+					{ y: 20, opacity: 0 },
+					{ y: 0, opacity: 1, duration: 0.3, delay: index * 0.1 } 
+				);
+			});
 		}
 	});
 
+	let topPos=0;
 
+	window.addEventListener("resize", function(){
+		if(window.innerWidth > 768 &&  menuBtn.classList.contains("active")){
+			openMenu.classList.remove("active");
+			closeMenu.classList.remove("active");
+			headerBar.classList.remove("active");
+			menu.classList.remove("active");
+			moText.classList.remove("active");
+		}
+	});
 
 	menuList.forEach(function(item, i){
 		item.addEventListener("click", function(e){
@@ -137,7 +160,13 @@ window.addEventListener("load", function() {
 			else{
 				gsap.to(window, { scrollTo: offsetList[i], duration: 0.6, ease: "power3out" });
 			}
+			openMenu.classList.remove("active");
+			closeMenu.classList.remove("active");
+			headerBar.classList.remove("active");
+			menu.classList.remove("active");
+			moText.classList.remove("active");
 		});
+	
 	});
 
 	window.addEventListener("scroll", function() {
@@ -158,8 +187,18 @@ window.addEventListener("load", function() {
     keytextTl.to("#main .keytext p.text2", { right: 0, top: "105%", duration: 0.4, ease: "Power3Out" }, "time4");
     keytextTl.fromTo("#pj-view", { xPercent: 100, opacity: 0 }, { xPercent: 0, opacity: 1, duration: 0.3, ease: "Power3Out" }, "time5");
 
+	let xPercentValue;
+
+	if (window.innerWidth > 1270) {
+		xPercentValue = -120; 
+	} else if (window.innerWidth > 540) {
+		xPercentValue = -300; 
+	} else {
+		xPercentValue = -300; 
+	}
+
     keytextTl.fromTo("#pj-view", { xPercent: 0 }, {
-        xPercent: -120,
+        xPercent: xPercentValue,
         scrollTrigger: {
             trigger: "#start",
             pin: true,
@@ -232,7 +271,7 @@ window.addEventListener("load", function() {
 	const openTl = gsap.timeline({
 		scrollTrigger: {
 			trigger: "#open-s",
-			start: "top 95%",
+			start: "top center",
 			end: "bottom 10%",
 			scrub: true,
 			// markers: true
@@ -251,19 +290,51 @@ window.addEventListener("load", function() {
 		});
     });
 	
-	gsap.set(track, { y: 0 });
+	const textTl=gsap.timeline({ repeat: -1, ease: "none" });
 
-	let unitHeight=track.firstElementChild.clientWidth;
+	let isMobile;
 
-	// console.log(track.firstElementChild.clientWidth);
+	function resizeHandler(){
+		if(window.innerWidth > 768){
+			if(isMobile != false){
+				isMobile=false;
 
-	gsap.to(track, {
-		y: unitHeight*-3, 
-		duration: 100,
-		repeat: -1, 
-		ease: "none"
-	});
+				textTl.clear();
 
+				let unitHeight=track.firstElementChild.clientWidth;
+
+				textTl.set(track, { x: 0, rotate: 90 });
+
+				textTl.to(track, {
+					y: unitHeight*-3,
+					duration: 100
+				});
+	
+			}
+		}
+		else{
+			if(isMobile != true){
+				isMobile=true;
+
+				textTl.clear();
+
+				let unitHeight=track.firstElementChild.clientWidth;
+
+				textTl.set(track, { y: 0, rotate: 0 });
+
+				textTl.to(track, {
+					x: unitHeight*-3,
+					duration: 100
+				});
+			}
+		}
+	}
+
+	resizeHandler();
+
+	window.addEventListener("resize", resizeHandler);
+
+	
 	// btnTop
 	btnTop.addEventListener("click", function(e){
 		e.preventDefault();
@@ -311,10 +382,18 @@ window.addEventListener("load", function() {
 				"사용자 경험을 극대화하며 반응형 디자인 최적화를 통해 다양한 디바이스에서 최적의 성능을 구현",
 				"CSS 미디어 쿼리와 유연한 그리드를 사용하여 다양한 환경에 적합한 사용자 인터페이스 구성"
 			]
+		},
+		{
+			subject: "React",
+			h2: ["컴포넌트 기반 개발", "상태 관리"],
+			p: [
+				"React의 컴포넌트를 활용하여 재사용 가능한 UI 요소를 구축, 컴포넌트의 상태를 관리하고, 라이프사이클을 이해",
+				"CSS, Sass 또는 styled-components를 이용해 컴포넌트를 스타일링"
+			]
 		}
 	];
 
-	let skillList=document.querySelectorAll("#skill .main_t");
+	let skillList=document.querySelectorAll("#skill .family");
 	let renderDOM=document.querySelector("#skill .right_b ul li")
 	let skillsN;
 
