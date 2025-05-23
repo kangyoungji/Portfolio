@@ -650,6 +650,9 @@ body {
 		font-size: 1.0625rem;
 	}
 }
+@media only screen and (max-width: 768px){
+	#aboutme p:first-of-type { margin-top: auto; }
+}
 
 /* skill */
 
@@ -1337,7 +1340,7 @@ body {
 
 #open-s .track {
 	display: flex;
-	margin-top: 10em;
+	margin-top: 16em;
 }
 
 #open-s .typography{
