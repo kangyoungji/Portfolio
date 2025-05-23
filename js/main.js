@@ -223,8 +223,8 @@ window.addEventListener("load", function() {
         }
     });
 
-    skillsTl.to("#skill .left a .main_t h2, #skill .left a .sub p", { y: 0, duration: 0.3 });
-    skillsTl.to("#skill .left a .main_t h2, #skill .right_b ul li", { x: 0, duration: 0.3 });
+    skillsTl.to("#skill .left a .main_t h2, #skill .left a .sub p", { y: 0, duration: 0.2 });
+    skillsTl.to("#skill .left a .main_t h2, #skill .right_b ul li", { x: 0, duration: 0.2 });
 
 	// project
 
