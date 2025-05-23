@@ -169,7 +169,11 @@ body {
 	backdrop-filter: blur(5px);
 }
 
-
+@media only screen and (max-width: 540px){
+	.curser-wrap {
+		display: none;
+	}
+}
 
 
 /* header */
@@ -1626,7 +1630,7 @@ body {
 a#top {
 	position: fixed;
     right: -100px; 
-    bottom: 50px; 
+    bottom: 3.125em; 
     width: 48px;
     height: 48px;
     border-radius: 50%;
@@ -1651,7 +1655,6 @@ a#top::after {
     left: 50%; 
     transform: translate(-50%, -50%); 
 }
-
 
 @media only screen and (max-width: 1270px) {
 
@@ -1700,9 +1703,35 @@ a#top::after {
 	#footer .copyright p{
 		margin-top: 50%;
 	}
+	a#top {
+		width: 40px;
+		height: 40px;
+	}
+	a#top.active{
+		right: 1rem;
+		z-index: 999;
+	}
+
+	a#top::after {
+		width: 40px;
+		height: 40px;
+	}
 }
 @media only screen and (max-width: 540px){
-		#footer .copyright p{
+	#footer .copyright p{
 		margin-top: 75%;
+	}
+	a#top {
+		width: 35px;
+		height: 35px;
+	}
+	a#top.active{
+		right: 2em;
+		z-index: 999;
+	}
+
+	a#top::after {
+		width: 35px;
+		height: 35px;
 	}
 }
