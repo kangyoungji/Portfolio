@@ -1594,7 +1594,7 @@ body {
 	font-size: 1.125rem;
 	font-weight: 400;
 	color: #fff;
-	margin-bottom: 50px;
+	margin-bottom: 30px;
 }
 
 #footer .cont .icon{
@@ -1604,8 +1604,8 @@ body {
 #footer .cont .icon a.github{
 	display: block;
 	background: url(../image/github-brands.png) no-repeat center center;
-	width: 55px;
-	height: 55px;
+	width: 35px;
+	height: 35px;
 	text-indent: -9999px;
 	background-size: contain;
 	margin-right: 30px;
@@ -1614,8 +1614,8 @@ body {
 #footer .cont .icon a.notion{
 	display: block;
 	background: url(../image/notion.png) no-repeat center center;
-	width: 55px;
-	height: 55px;
+	width: 35px;
+	height: 35px;
 	text-indent: -9999px;
 	background-size: contain;
 }
