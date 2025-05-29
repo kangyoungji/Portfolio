@@ -437,4 +437,12 @@ window.addEventListener("load", function() {
 			skillUI(i);
 		});
 	});
+	
+	let contact = document.querySelector(".contact");
+
+	contact.addEventListener("click", function(e) {
+		e.preventDefault(); 
+		const footer = document.querySelector("#footer"); 
+		gsap.to(window, { scrollTo: footer, duration: 0.6, ease: "power3.out" }); 
+	});
 });
