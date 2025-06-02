@@ -270,7 +270,7 @@ body {
 	#header .logo {
 		flex: 1;
 	}
-	#header .logo a{
+	#header .logo{
 		font-size: 1.125rem;
 	}
 	#header .header-inner{
